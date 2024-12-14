@@ -1,4 +1,5 @@
 interface Player {
   playerName: string;
-  playerScore: number;
+  currentScore: number;
+  scoreHistory: PlayerScoreHistory[];
 }

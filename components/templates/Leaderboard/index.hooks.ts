@@ -1,21 +1,36 @@
 import { fetchWithAuth } from "@/lib/httpCalls";
 import { useQuery } from "@tanstack/react-query";
 
-export const getMockUniversityData = () => {
-  let players = [
-    { playerName: "Alice", playerScore: Math.floor(Math.random() * 100) },
-    { playerName: "Bob", playerScore: Math.floor(Math.random() * 100) },
-    { playerName: "Charlie", playerScore: Math.floor(Math.random() * 100) },
-    { playerName: "David", playerScore: Math.floor(Math.random() * 100) },
-    { playerName: "Eve", playerScore: Math.floor(Math.random() * 100) },
-  ];
+type NewType = University;
 
-  players = players.sort((a, b) => b.playerScore - a.playerScore);
+export const getMockUniversityData = (): University => {
+  let names = ["Alice", "Bob", "Charlie", "David", "Eve"];
+  let players: Player[] = [];
 
-  const exampleData: UniversityData = {
-    uniName: "University of Groningen",
-    uniRank: Math.floor(Math.random() * 100),
-    uniScore: Math.floor(Math.random() * 100),
+  const dates = Array.from(
+    { length: 10 },
+    (_, i) => new Date().getTime() - i * 1000 * 60 * 60 * 24,
+  );
+
+  for (let i = 0; i < 5; i++) {
+    const history: PlayerScoreHistory[] = dates.map((date) => ({
+      date: date,
+      score: Math.floor(Math.random() * 100),
+    }));
+
+    players.push({
+      playerName: names[i],
+      scoreHistory: history,
+      currentScore: history[history.length - 1].score,
+    });
+  }
+
+  // players = players.sort((a, b) => b.currentScore - a.currentScore);
+
+  const exampleData: University = {
+    universityName: "University of Groningen",
+    universityRank: Math.floor(Math.random() * 100),
+    universityScore: Math.floor(Math.random() * 100),
     players: players,
   };
 
