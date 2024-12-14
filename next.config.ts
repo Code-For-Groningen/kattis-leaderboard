@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    output: "export",
-    basePath: "/kattis-leaderboard",
-    trailingSlash: true,
-    skipTrailingSlashRedirect: true,
+  output: "export",
+  basePath: "/kattis-leaderboard",
+  trailingSlash: true,
+  skipTrailingSlashRedirect: true,
 };
 
 export default nextConfig;
