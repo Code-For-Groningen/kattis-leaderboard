@@ -20,6 +20,7 @@ export const getMockUniversityData = (): University => {
 
     players.push({
       playerName: names[i],
+      profilePictureUrl: "",
       scoreHistory: history,
       currentScore: history[history.length - 1].score,
     });

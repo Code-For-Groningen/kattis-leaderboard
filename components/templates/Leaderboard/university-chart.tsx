@@ -1,14 +1,7 @@
+import { WARM_COLORS } from "@/lib/constants/colors";
+import { stringToNumber } from "@/lib/utils";
 import { FC } from "react";
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Line,
-  LineChart,
-  Text,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
 
 interface UniversityChartProps {
   data: University;
@@ -32,6 +25,12 @@ const transformData = (data: Player[]) => {
   return Object.values(newData);
 };
 
+const getColor = (name: string) => {
+  console.log(WARM_COLORS);
+
+  return WARM_COLORS[stringToNumber(name, WARM_COLORS.length)];
+};
+
 const UniversityChart: FC<UniversityChartProps> = ({ data }) => {
   const top5Names = data.players.slice(0, 5).map((player) => player.playerName);
 
@@ -47,7 +46,12 @@ const UniversityChart: FC<UniversityChartProps> = ({ data }) => {
         <YAxis />
         <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
         {top5Names.map((name) => (
-          <Line type="monotone" dataKey={name} key={name} />
+          <Line
+            type="monotone"
+            dataKey={name}
+            key={name}
+            stroke={getColor(name)}
+          />
         ))}
         <YAxis />
       </LineChart>
